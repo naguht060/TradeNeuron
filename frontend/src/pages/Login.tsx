@@ -1,14 +1,4 @@
-import {
-  ArrowLeft,
-  Eye,
-  EyeOff,
-  Github,
-  Info,
-  Loader2,
-  LogIn,
-  MessageCircle,
-  ShieldCheck,
-} from 'lucide-react'
+import { ArrowLeft, Eye, EyeOff, Info, Loader2, LogIn, ShieldCheck } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
@@ -215,17 +205,21 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-8 px-4">
-      <div className="container max-w-6xl">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16">
-          {/* Login Form - First on mobile */}
-          <Card className="w-full max-w-md order-1 lg:order-2 shadow-xl">
+    <div className="relative min-h-screen overflow-hidden bg-background">
+      <div className="min-h-screen flex items-center justify-center px-4 py-8">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(20,184,166,0.14),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(59,130,246,0.12),transparent_34%)]" />
+        <div className="container max-w-6xl">
+          <div className="grid items-center gap-8 lg:grid-cols-[1fr_420px] lg:gap-14">
+            {/* Login Form - First on mobile */}
+            <Card className="w-full max-w-md justify-self-center border-border/70 bg-card/95 shadow-2xl shadow-black/10 backdrop-blur order-1 lg:order-2">
             <CardHeader className="text-center">
-              <div className="flex justify-center mb-4">
-                <img src="/logo.png" alt="TradeNeuron" className="h-20 w-20" />
+              <div className="flex justify-center mb-5">
+                <div className="rounded-2xl border bg-background p-3 shadow-sm">
+                  <img src="/logo.png" alt="TradeNeuron" className="h-16 w-16" />
+                </div>
               </div>
-              <CardTitle className="text-2xl">Welcome Back</CardTitle>
-              <CardDescription>Sign in to your TradeNeuron account</CardDescription>
+              <CardTitle className="text-2xl">Sign in to TradeNeuron</CardTitle>
+              <CardDescription>Access your trading workspace and broker session.</CardDescription>
             </CardHeader>
             <CardContent>
               {step === 'password' ? (
@@ -368,46 +362,35 @@ export default function Login() {
           </Card>
 
           {/* Welcome Content - Second on mobile */}
-          <div className="flex-1 max-w-xl text-center lg:text-left order-2 lg:order-1">
-            <h1 className="text-4xl lg:text-5xl font-bold mb-6">
-              Welcome to <span className="text-primary">TradeNeuron</span>
+            <div className="max-w-2xl text-center lg:text-left order-2 lg:order-1">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border bg-background/80 px-3 py-1 text-sm text-muted-foreground shadow-sm">
+              <ShieldCheck className="h-4 w-4 text-emerald-500" />
+              Single-user, self-hosted trading control
+            </div>
+            <h1 className="mb-5 text-4xl font-bold tracking-normal lg:text-5xl">
+              Trade smarter with <span className="text-primary">TradeNeuron</span>
             </h1>
-            <p className="text-lg lg:text-xl mb-8 text-muted-foreground">
-              Sign in to your account to access your trading dashboard and manage your algorithmic
-              trading strategies.
+            <p className="mb-8 text-lg text-muted-foreground lg:text-xl">
+              Run strategies, monitor positions, and manage broker-connected automation from one
+              focused dashboard.
             </p>
 
-            <Alert className="mb-6">
+            <div className="mb-6 grid gap-3 sm:grid-cols-3">
+              {['Broker session', 'Live dashboard', 'Strategy host'].map((item) => (
+                <div key={item} className="rounded-lg border bg-background/80 px-4 py-3 text-sm shadow-sm">
+                  {item}
+                </div>
+              ))}
+            </div>
+
+            <Alert className="bg-background/80 text-left">
               <Info className="h-4 w-4" />
-              <AlertTitle>First Time User?</AlertTitle>
+              <AlertTitle>First time here?</AlertTitle>
               <AlertDescription>
-                Contact your administrator to set up your account.
+                Use the administrator account created during setup. Passwords are encrypted and
+                cannot be recovered directly.
               </AlertDescription>
             </Alert>
-
-            <div className="flex justify-center lg:justify-start gap-4">
-              <Button variant="outline" asChild>
-                <a
-                  href="https://github.com/marketcalls/openalgo"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2"
-                >
-                  <Github className="h-5 w-5" />
-                  GitHub
-                </a>
-              </Button>
-              <Button variant="outline" asChild>
-                <a
-                  href="https://openalgo.in/discord"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2"
-                >
-                  <MessageCircle className="h-5 w-5" />
-                  Discord
-                </a>
-              </Button>
             </div>
           </div>
         </div>
